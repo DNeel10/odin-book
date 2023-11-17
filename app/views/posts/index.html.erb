@@ -1,0 +1,13 @@
+<h1>Posts</h1>
+
+<%= turbo_frame_tag id='new_post' do %>
+  <%= link_to "create post", new_post_path %>
+<% end %>
+
+<div id='posts'>
+  <% @posts.order(id: :desc).each do |post| %>
+    <div>
+      <%= render post %>
+    </div>
+  <% end %>
+</div>

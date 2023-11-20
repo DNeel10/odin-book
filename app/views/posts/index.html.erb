@@ -4,7 +4,7 @@
   <%= link_to "create post", new_post_path %>
 <% end %>
 
-<div id='posts'>
+<div class='form-group' id='posts'>
   <% @posts.order(id: :desc).each do |post| %>
     <div>
       <%= render post %>

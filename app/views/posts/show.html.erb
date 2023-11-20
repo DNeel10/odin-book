@@ -1,1 +1,5 @@
-<%= render @post %>
+<small>created by: <%= @post.user.email %></small>
+<div>
+  <%= @post.body %>
+</div>
+<small><%= link_to 'edit', edit_post_path %> | <%= link_to 'delete', method: 'delete' %>

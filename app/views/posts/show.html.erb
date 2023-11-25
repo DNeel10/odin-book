@@ -2,4 +2,10 @@
 <div>
   <%= @post.body %>
 </div>
-<small><%= link_to 'edit', edit_post_path %> | <%= link_to 'delete', method: 'delete' %>
+<small><%= link_to 'edit', edit_post_path %> | <%= link_to 'delete', method: 'delete' %></small>
+
+<h2>Comments</h2>
+<%= render @post.comments %>
+
+  <%= link_to 'Add a Comment', new_comment_path %>
+

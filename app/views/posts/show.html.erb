@@ -2,10 +2,15 @@
 <div>
   <%= @post.body %>
 </div>
-<small><%= link_to 'edit', edit_post_path %> | <%= link_to 'delete', method: 'delete' %></small>
+<small><%= link_to 'edit', edit_post_path %> | 
+       <%= link_to 'delete', post_path(@post), data: { turbo_method: :delete,
+                                            turbo_confirm: 'Are you sure?' } %>
+</small><br>
 
-<h2>Comments</h2>
-<%= render @post.comments %>
+<% @post.comments.each do |comment| %>
+  <%= render partial: 'posts/comments/comment', locals: { comment: comment } %>
+<% end %>
 
-  <%= link_to 'Add a Comment', new_comment_path %>
+<%= render "posts/comments/comment_form" %>
+
 

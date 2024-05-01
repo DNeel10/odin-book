@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
-  before_action :set_post, only: [:show, :delete, :edit, :update]
+  before_action :set_post, only: [:show, :destroy, :edit, :update]
 
   def index
     @posts = Post.all
@@ -36,16 +36,19 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
-  def delete
+  def destroy
     @post.destroy
+
+    redirect_to root_path
   end
 
   private
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params

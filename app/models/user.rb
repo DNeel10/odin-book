@@ -6,16 +6,43 @@ class User < ApplicationRecord
          
   devise :omniauthable, omniauth_providers: [:google]
 
+  # Things a User can create
   has_many :posts
   has_many :comments, dependent: :destroy
+
   has_many :likes
 
+  # people You follow
+  has_many :given_follows, class_name: "Follow", 
+                           foreign_key: "follower_id",
+                           dependent: :destroy
+  has_many :followed_users, through: :given_follows, source: :followed
 
+  # people who follow YOU
+  has_many :received_follows, class_name: "Follow",
+                              foreign_key: "followed_id",
+                              dependent: :destroy
+  has_many :followers, through: :received_follows, source: :follower
+
+  # Follow Logic as an instance method within the User model:
+  def follow(user)
+    given_follows.create(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    given_follows.find_by(followed_id: user.id).destroy if following?(user)
+  end
+
+  def following?(user)
+    followed_users.include?(user)
+  end
+
+  # OAuth
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
 
-    # Uncomment the section below if you want users to be created if they don't exist
+    # Users will be created if they don't currently exist
     unless user
         user = User.create(
            email: data['email'],

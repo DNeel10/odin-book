@@ -1,7 +1,12 @@
 
 <div>
   <%= @post.body %><br>
-  <small>created by: <%= @post.user.email %></small><br>
+  <small>created by: <%= @post.user.email %></small> 
+  <% if current_user.following?(@post.user) %>
+    <%= button_to "unfollow", unfollow_user_path(@post.user), method: :delete, class: 'btn btn-outline-primary btn-sm', form: {class: 'd-inline'} %>
+  <% else %>
+    <%= link_to "follow", follow_user_path(@post.user), class: 'btn btn-outline-primary btn-sm' %>
+  <% end %>
   <%= render partial: "posts/likes/button", locals: { likeable: @post } %>
 </div>
 <% if @post.user == current_user %>

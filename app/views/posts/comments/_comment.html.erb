@@ -1,5 +1,10 @@
 <div class="container-fluid mt-4 mb-2">
   <%= comment.body %><br>
-  <small>Posted by: <%= comment.user.email %></small>
+  <small>Posted by: <%= comment.user.email %></small> 
+  <% if current_user.following?(comment.user) %>
+    <%= button_to "unfollow", unfollow_user_path(comment.user), method: :delete, class: 'btn btn-outline-primary btn-sm', form: {class: 'd-inline'} %>
+  <% else %>
+    <%= link_to "follow", follow_user_path(comment.user), class: 'btn btn-outline-primary btn-sm' %>
+  <% end %>
   <%= render partial: "posts/likes/button", locals: {likeable: comment } %>
 </div>

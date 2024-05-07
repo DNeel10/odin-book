@@ -1,0 +1,7 @@
+  <% if current_user && content.user != current_user%>
+    <% if current_user.following?(content.user) %>
+      <%= button_to "unfollow", unfollow_user_path(content.user), method: :delete, class: 'btn btn-outline-primary btn-sm', form: {class: 'd-inline'} %>
+    <% else %>
+      <%= link_to "follow", follow_user_path(content.user), class: 'btn btn-outline-primary btn-sm' %>
+    <% end %> 
+  <% end %>

@@ -1,9 +1,4 @@
 <div> 
   <%= post.user.email%>
-  <% if current_user.following?(post.user) %>
-    <%= button_to "unfollow", unfollow_user_path(post.user), method: :delete, class: 'btn btn-outline-primary btn-sm', form: {class: 'd-inline'} %>
-  <% else %>
-    <%= link_to "follow", follow_user_path(post.user), class: 'btn btn-outline-primary btn-sm' %>
-  <% end %>
-  | <%= link_to post.body, post %>
+  <%= render partial: "follows/follow_buttons", locals: { content: post } %> | <%= link_to post.body, post %>
 </div>

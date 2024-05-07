@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :likes, module: :comments
   end
   
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # Route to follow/unfollow that is tied to a specific user
   resources :users do
     member do
@@ -21,6 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
 
 end

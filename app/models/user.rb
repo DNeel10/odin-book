@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  scope :followed_posts, -> (post) { where(followed_user.include?(post.user))}
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,6 +23,11 @@ class User < ApplicationRecord
                               foreign_key: "followed_id",
                               dependent: :destroy
   has_many :followers, through: :received_follows, source: :follower
+
+  # User Profile relationship
+  has_one :profile
+
+  after_create :create_empty_proflie
 
   # Follow Logic as an instance method within the User model:
   def follow(user)
@@ -52,4 +56,10 @@ class User < ApplicationRecord
     end
     user
   end
+
+  private 
+
+    def create_empty_profile
+      create_profile unless profile
+    end
 end

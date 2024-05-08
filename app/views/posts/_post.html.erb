@@ -1,4 +1,8 @@
-<div> 
-  <%= post.user.email%>
-  <%= render partial: "follows/follow_buttons", locals: { content: post } %> | <%= link_to post.body, post %>
+<div class="card mb-2"> 
+  <div class="card-body">
+    <%= link_to post.body, post %>
+  </div>
+  <div class="card-footer bg-primary-subtle text-secondary">
+    posted by: <%= link_to post.user.email, user_profile_path(post.user), style: "text-decoration: none" %> <%= render partial: "follows/follow_buttons", locals: { content: post }, class: "d-inline" %>
+  </div>
 </div>

@@ -1,0 +1,64 @@
+<div class="text-center">
+  <% if @user.profile.name %>
+    <h1><%= @user.profile.name %></h1>
+  <% else %>
+    <h1><%= @user.email %>
+  <% end %>
+  <%
+=begin%>
+ <% image_tag %> 
+<%
+=end%>
+  <div class="mb-3">
+    <% if @user == current_user %>
+      <%= link_to "Edit Profile", edit_user_profile_path, class: "btn btn-outline-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="container-sm text-center mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="card"> 
+        <div class="card-header">Following: <%= @user.followed_users.count %></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Followers: <%= @user.followers.count %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Email: </h5>
+          <p class="card-text"><%= @user.email %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Birthday: </h5>
+          <p class="card-text"><%= @profile.birthday %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col">
+      <div class="card">   
+        <div class="card-header ">
+          <h3>About</h3>
+        </div>
+        <div class="card-body"><%= @profile.about %></div>
+      </div>
+    </div>
+  </div>
+</div>

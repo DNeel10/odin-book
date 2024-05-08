@@ -1,11 +1,14 @@
 <h1>Posts</h1>
 
-<%= turbo_frame_tag id='new_post' do %>
-  <%= link_to "create post", new_post_path, class: 'btn btn-primary' %>
-<% end %>
+<div class="mb-4">
+  <%= turbo_frame_tag id='new_post' do %>
+    <%= link_to "create post", new_post_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
 
 <div class='form-group' id='posts'>
-  <% @posts.order(id: :desc).each do |post| %>
+  <% @posts.order(id: :desc).limit(5).each do |post| %>
     <div>
       <%= render post %>
     </div>

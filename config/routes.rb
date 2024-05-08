@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  resources :posts do
-    resources :comments
-  end
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :posts do
+    resources :comments
     resources :likes, module: :posts
   end
   
@@ -13,15 +12,12 @@ Rails.application.routes.draw do
     resources :likes, module: :comments
   end
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # Route to follow/unfollow that is tied to a specific user
   resources :users do
+    # routes to follow and unfollow other users
     member do
       get 'follow', to: 'follows#create'
       delete 'unfollow', to: 'follows#destroy'
     end
+    resource :profile, only: [:edit, :show, :update]
   end
-
-
-
 end

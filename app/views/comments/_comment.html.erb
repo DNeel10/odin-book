@@ -1,3 +1,14 @@
-<div> 
-  <%= comment.user.email %> | <%= @comment.body %>
-</div>
+  <div class="container-fluid mt-4 mb-2">
+    <%= nested_comment.body %><br>
+    <small>Posted by: <%= nested_comment.user.email %></small> 
+    <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %><br>
+    <%= render partial: "likes/button", locals: { likeable: nested_comment } %><br>
+
+      <!-- Render nested comments -->
+    
+      <% nested_comment.comments.each do |reply| %>
+        <%= render partial: "comments/comment", locals: { nested_comment: reply } %>
+      <% end %>
+
+      <%= render partial: "comments/comment_form", locals: { commentable: nested_comment } %>
+  </div>

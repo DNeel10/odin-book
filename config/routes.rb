@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :posts do
-    resources :comments
-    resources :likes, module: :posts
+    resources :comments, module: :posts
+    resources :likes, only: [:create, :destroy], module: :posts
   end
   
   resources :comments do
-    resources :likes, module: :comments
+    resources :comments, module: :comments
+    resources :likes, only: [:create, :destroy], module: :comments
   end
   
   resources :users do

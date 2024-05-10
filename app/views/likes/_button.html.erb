@@ -1,0 +1,7 @@
+<% unless likeable.user == current_user %>
+  <% if likeable.is_a?(Comment) %>
+    <%= button_to("Like", comment_likes_path(likeable, likeable.likes.build), class: 'btn btn-primary btn-sm') %>
+  <% elsif likeable.is_a?(Post) %>
+    <%= button_to("Like", post_likes_path(likeable, likeable.likes.build), class: 'btn btn-primary btn-sm') %>
+  <% end %>
+<% end %>

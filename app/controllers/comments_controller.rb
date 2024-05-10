@@ -1,22 +1,27 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post
+  before_action :set_commentable, only: [:create, :new]
   
   def new
-    @comment = @post.comments.new
+    @comment = @commentable.comments.new
   end
 
   def create
-    @comment = @post.comments.new(comment_params)
+    @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
     @comment.save
 
     if @comment.save
-      redirect_to @post
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end
   end
+
+  def show
+  end
+
+  
 
   private
   
@@ -24,7 +29,4 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
-  def set_post
-    @post = Post.find(params[:post_id])
-  end
 end

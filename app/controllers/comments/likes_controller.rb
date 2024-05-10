@@ -1,5 +1,4 @@
 class Comments::LikesController < LikesController
-  before_action :set_likeable
 
   private
 

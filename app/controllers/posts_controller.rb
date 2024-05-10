@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   before_action :set_post, only: [:show, :destroy, :edit, :update]
 
+
   def index
     @posts = Post.includes(:user)
   end
@@ -36,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @comments = @post.comments.includes(:comments)
   end
 
   def destroy
@@ -54,4 +55,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body)
   end
+
 end

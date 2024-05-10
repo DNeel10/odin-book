@@ -3,7 +3,7 @@
   <%= @post.body %><br>
   <small>created by: <%= @post.user.email %></small> 
   <%= render partial: "follows/follow_buttons", locals: { content: @post } %>
-  <%= render partial: "posts/likes/button", locals: { likeable: @post } %>
+  <%= render partial: "likes/button", locals: { likeable: @post } %>
 </div>
 
 <% if @post.user == current_user %>
@@ -13,10 +13,12 @@
   </small><br>
 <% end %>
 
-<% @post.comments.each do |comment| %>
-  <%= render partial: 'posts/comments/comment', locals: { comment: comment } %>
-<% end %>
 
-<%= render "posts/comments/comment_form" %>
+<%= render partial: "comments/comment_form", locals: { commentable: @post } %>
+
+<div id="comments">
+  <%= render partial: "comments/comment", collection: @comments, as: :nested_comment %>
+</div>
+
 
 

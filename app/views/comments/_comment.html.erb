@@ -1,14 +1,26 @@
-  <div class="container-fluid mt-4 mb-2">
-    <%= nested_comment.body %><br>
-    <small>Posted by: <%= nested_comment.user.email %></small> 
-    <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %><br>
-    <%= render partial: "likes/button", locals: { likeable: nested_comment } %><br>
+  <div class="mt-4 mb-2">
+    <div class="container-fluid border-start border-bottom border-secondary" >
+      <%= nested_comment.body %><br>
+      <small>Posted by: <%= nested_comment.user.email %></small> 
+      <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %><br>
+      <%= render partial: "likes/button", locals: { likeable: nested_comment } %><br>
 
+      <div data-controller="replies">
+        <div data-replies-target="button" data-action="click->replies#toggle" class="d-inline" 
+             style="text-decoration: underline; cursor: pointer; color: blue">
+              <p class="pb-1">Reply</p>
+        </div>
+        <div data-replies-target="form" data-primary-class="d-none" class="d-none mb-2">
+          <%= render partial: "comments/comment_form", locals: { commentable: nested_comment } %>
+        </div>
+      </div>
+    </div>
       <!-- Render nested comments -->
     
-      <% nested_comment.comments.each do |reply| %>
-        <%= render partial: "comments/comment", locals: { nested_comment: reply } %>
+      <% nested_comment.comments.includes(:comments).order(created_at: :desc).each do |reply| %>
+        <div class="container-fluid" style="padding-right: 0; margin-right: auto; ">
+          <%= render partial: "comments/comment", locals: { nested_comment: reply } %>
+        </div>
       <% end %>
 
-      <%= render partial: "comments/comment_form", locals: { commentable: nested_comment } %>
   </div>

@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :set_commentable
   before_action :authenticate_user!
-  before_action :set_commentable, only: [:create, :new]
+
   
   def new
     @comment = @commentable.comments.new
@@ -12,7 +13,7 @@ class CommentsController < ApplicationController
     @comment.save
 
     if @comment.save
-      redirect_to root_path
+      redirect_back(fallback_location: root_path)
     else
       render :new, status: :unprocessable_entity
     end

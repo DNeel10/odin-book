@@ -1,2 +1,3 @@
-  <%= render 'comment_form' %>
-
+<%= turbo_frame_tag id="new_comment" do %>
+  <%= render 'comments/comment_form', locals: {commentable: @commentable} %>
+<% end %>

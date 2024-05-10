@@ -17,7 +17,7 @@
 <%= render partial: "comments/comment_form", locals: { commentable: @post } %>
 
 <div id="comments">
-  <%= render partial: "comments/comment", collection: @comments, as: :nested_comment %>
+  <%= render partial: "comments/comment", collection: @comments.order(created_at: :desc), as: :nested_comment %>
 </div>
 
 

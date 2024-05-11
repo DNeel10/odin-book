@@ -4,4 +4,8 @@ class Post < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   scope :by_followed_user, -> (user) { where(user_id: user.followed_users) }
+
+  def liked_by?(user)
+    likes.exists?(user: user)
+  end 
 end

@@ -5,4 +5,7 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   has_many :comments, as: :commentable
 
+  def liked_by?(user)
+    likes.exists?(user: user)
+  end 
 end

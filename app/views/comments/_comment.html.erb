@@ -1,9 +1,11 @@
   <div class="mt-4 mb-2">
-    <div class="container-fluid border-start border-bottom border-secondary" >
+    <div class="container-fluid border-start border-bottom border-secondary">
       <%= nested_comment.body %><br>
-      <small>Posted by: <%= nested_comment.user.email %></small> 
-      <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %><br>
-      <%= render partial: "likes/button", locals: { likeable: nested_comment } %><br>
+      <small>Posted by: <%= nested_comment.user.email %></small> <br>
+      <div class="d-flex gap-2">
+        <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %>
+        <%= render partial: "likes/button", locals: { likeable: nested_comment } %>
+      </div>
 
       <div data-controller="replies">
         <div data-replies-target="button" data-action="click->replies#toggle" class="d-inline" 

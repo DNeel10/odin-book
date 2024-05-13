@@ -1,7 +1,7 @@
 
 <div>
   <%= @post.body %><br>
-  <small>created by: <%= @post.user.email %></small> 
+  <small>created by: <%= @post.user.email %> | likes: <%= @post.likes.count %></small>
   <%= render partial: "follows/follow_buttons", locals: { content: @post } %>
   <%= render partial: "likes/button", locals: { likeable: @post } %>
 </div>

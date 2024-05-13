@@ -1,9 +1,11 @@
 
 <div>
   <%= @post.body %><br>
-  <small>created by: <%= @post.user.email %> | likes: <%= @post.likes.count %></small>
-  <%= render partial: "follows/follow_buttons", locals: { content: @post } %>
-  <%= render partial: "likes/button", locals: { likeable: @post } %>
+  <small>created by: <%= link_to @post.user.email, user_profile_path(@post.user) %> | likes: <%= @post.likes.count %></small><br>
+  <div class="d-flex gap-2 mb-3">
+    <%= render partial: "likes/button", locals: { likeable: @post } %>
+    <%= render partial: "follows/follow_buttons", locals: { content: @post } %>
+  </div>
 </div>
 
 <% if @post.user == current_user %>

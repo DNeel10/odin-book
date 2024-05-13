@@ -1,13 +1,16 @@
 <div class="container-fluid">
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="" alt="placeholder image">
-    </div>
-    <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3">Welcome to Odin Book</h1>
-      <p class="lead">
+  <div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold lh-1 mb-3">Welcome to Odin Book</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">
         "Start conversations. Meet new people. Do normal social media stuff. Enjoy your time!"
       </p>
+      <% if current_user %>
+        <%= link_to "Explore", posts_path, class: "btn btn-primary btn-lg" %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

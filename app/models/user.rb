@@ -6,6 +6,9 @@ class User < ApplicationRecord
          
   devise :omniauthable, omniauth_providers: [:google]
 
+  # User Image
+  has_one_attached :avatar
+
   # Things a User can create
   has_many :posts
   has_many :comments, dependent: :destroy
@@ -27,7 +30,7 @@ class User < ApplicationRecord
   # User Profile relationship
   has_one :profile
 
-  after_create :create_empty_proflie
+  after_create :create_empty_profile
 
   # Follow Logic as an instance method within the User model:
   def follow(user)

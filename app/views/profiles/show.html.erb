@@ -1,17 +1,23 @@
+<div id="user-image">
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, class: "rounded-circle rounded mx-auto d-block", size: "200x200" %>
+  <% else %>
+    <%= image_tag "profile.png", class: "rounded-circle rounded mx-auto d-block", size: "150x150" %>
+  <% end %>
+</div>
+
 <div class="text-center">
   <% if @user.profile.name %>
     <h1><%= @user.profile.name %></h1>
   <% else %>
     <h1><%= @user.email %>
   <% end %>
-  <%
-=begin%>
- <% image_tag %> 
-<%
-=end%>
+
   <div class="mb-3">
     <% if @user == current_user %>
       <%= link_to "Edit Profile", edit_user_profile_path, class: "btn btn-outline-primary" %>
+    <% else %>
+      <%= render partial: "follows/follow_buttons", locals: { content: @profile } %>
     <% end %>
   </div>
 </div>
@@ -42,7 +48,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card">
+      <div class="card" style="height: 100%">
         <div class="card-body">
           <h5 class="card-title">Birthday: </h5>
           <p class="card-text"><%= @profile.formatted_date %>

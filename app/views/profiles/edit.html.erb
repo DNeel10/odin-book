@@ -13,6 +13,13 @@
     <%= f.text_area :about, class: "form-control", size: "70x5" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.fields_for :user do |u| %>
+      <%= u.label :avatar, "Profile Image: ", class: "form-label"  %>
+      <%= u.file_field :avatar %>
+    <% end %>
+  </div>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
 

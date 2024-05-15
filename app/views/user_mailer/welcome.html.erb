@@ -1,0 +1,26 @@
+
+<div style="display: flex; align-items: center; flex-direction: column">
+  <div>
+    <div style="display: flex">
+      <h1>Welcome to Odin-Book, <%= @user.email %>!</h1>
+    </div>
+
+    <div style="display-flex">
+      <p>
+        There isn't much to do at Odin-Book, yet - Please feel free post your thoughts, explore posts that others have made, and comment on them appropriately.
+      </p>
+    </div>
+    
+    <p>
+      Feel free to edit your <%= link_to "Profile", user_profile_url(user_id: @user.id) %> and add a picture along with some personal information about yourself.
+    </p>
+    
+    <p>
+      Get to posting!
+    </p>
+    
+    <p>
+      The Odin-Book Team
+    </p>
+  </div>
+</div>

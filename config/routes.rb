@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   root 'pages#home'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
   resources :posts do
     resources :comments, module: :posts

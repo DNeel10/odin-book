@@ -73,4 +73,8 @@ Rails.application.configure do
 
   #active_storage service
   config.active_storage.service = :local
+  
+  # Letter_opener Config
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end

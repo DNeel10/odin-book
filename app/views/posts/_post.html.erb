@@ -1,6 +1,6 @@
-<div class="card mb-2"> 
+<div class="card mb-4 shadow"> 
   <div class="card-header bg-body d-flex justify-content-between">
-    <div>posted by: <%= link_to post.user.email, user_profile_path(post.user), style: "text-decoration: none" %></div>
+    <div>Posted by: <%= link_to post.user.email, user_profile_path(post.user), style: "text-decoration: none" %></div>
     <div class="align-items-right">
       Likes: <%= post.likes.count %>
     </div>

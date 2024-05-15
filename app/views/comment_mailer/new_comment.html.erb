@@ -1,0 +1,36 @@
+<div style="display: flex; align-items: center; flex-direction: column">
+
+  <div>
+    <div style="display: flex">
+      <h1>A comment has been added</h1>
+    </div>
+    <div style="display: flex">
+      <p>
+        <%= @greeting %>,
+          <% if @user.profile.name %>
+            <%= @user.profile.name %>
+          <% else %>
+            <%= @user.email %>
+          <% end %>
+        <br>
+        A new comment has been added to something you wrote!
+      </p>
+    </div>
+    <blockquote>
+      <em><%= @comment.body %></em>
+    </blockquote>
+    <% if @comment.commentable.is_a?(Post) %>
+      <p>
+        Check it out and respond <%= link_to "here", @comment.commentable %>!
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "Log in", new_user_session_url %> to check it out!
+      </p>
+    <% end %>
+    <p>
+      Sincerely,<br>
+      The Odin-Book Team
+    </p>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_commentable
+  before_action :set_commentable, only: [:new, :create]
   before_action :authenticate_user!
 
   
@@ -14,15 +14,15 @@ class CommentsController < ApplicationController
 
     if @comment.save
       redirect_back(fallback_location: root_path)
+      CommentMailer.new_comment(@comment).deliver_now
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
+    @comment = Comment.find(params[:id])
   end
-
-  
 
   private
   

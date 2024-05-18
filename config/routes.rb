@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'pages/home'
   root 'pages#home'
 
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   resources :users do
     # routes to follow and unfollow other users
     member do
-      get 'follow', to: 'follows#create'
+      post 'follow', to: 'follows#create'
       delete 'unfollow', to: 'follows#destroy'
     end
     resource :profile, only: [:edit, :show, :update]

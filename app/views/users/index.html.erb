@@ -1,0 +1,37 @@
+<h1>Find Other Users!</h1>
+
+<% @users.each do |user| %>
+  <div class="card mb-2 shadow-sm">
+    <div class="container mb-2 row d-flex">
+      <div class="col-1 d-flex justify-content-left align-items-center">
+        <% if user.avatar.attached? %>
+          <div>
+            <%= image_tag user.avatar, class: "rounded-circle rounded mx-auto d-block", size: "75x75" %>
+          </div>
+        <% else %>
+          <div>
+            <%= image_tag "profile.png", class: "rounded-circle rounded mx-auto d-block", size: "75x75" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col">
+        <div class="card-header bg-white d-flex justify-content-between">
+          <div><b><%= user.email.split('@').first %></b></div>
+          <div>
+            <%= turbo_frame_tag dom_id(user, :follow_button) do %>
+              <%= render partial: "follows/follow_buttons", locals: { user: user } %>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-body">
+          <% unless user.profile.about.blank? %>
+            <%= user.profile.about %>
+          <% else %>
+            This user has not posted a description yet
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

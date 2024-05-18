@@ -1,12 +1,27 @@
-<div class="card mb-4 shadow"> 
-  <div class="card-header bg-body d-flex justify-content-between">
-    <div>Posted by: <%= link_to post.user.email, user_profile_path(post.user), style: "text-decoration: none" %></div>
-    <div class="align-items-right">
-      Likes: <%= post.likes.count %>
-    </div>
 
+  <div>
+    <%= post.body %><br>
+    <small>created by: <%= link_to post.user.email, user_profile_path(post.user) %> | likes: <%= post.likes.count %></small><br>
+    <div class="d-flex gap-2 mb-3">
+      <%= turbo_frame_tag dom_id(post, :like_button) do %>
+        <%= render partial: "likes/button", locals: { likeable: post } %>
+      <% end %>
+      <%= turbo_frame_tag dom_id(post.user, :follow_button) do %>
+        <%= render partial: "follows/follow_buttons", locals: { user: post.user } %>
+      <% end %>
+    </div>
   </div>
-  <div class="card-body text-secondary">
-    <%= link_to post.body, post, style: "text-decoration: none" %>
+
+  <% if post.user == current_user %>
+    <small><%= link_to 'edit', edit_post_path(post) %> | 
+        <%= link_to 'delete', post_path(post), data: { turbo_method: :delete,
+                                              turbo_confirm: 'Are you sure?' } %>
+    </small><br>
+  <% end %>
+
+
+  <%= render partial: "comments/comment_form", locals: { commentable: post } %>
+
+  <div id="comments_<%=dom_id(@post) %>">
+    <%= render partial: "comments/comment", collection: @comments.order(created_at: :desc), as: :nested_comment %>
   </div>
-</div>

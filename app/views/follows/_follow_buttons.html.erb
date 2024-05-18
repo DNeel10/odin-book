@@ -1,7 +1,7 @@
-  <% if current_user && content.user != current_user%>
-    <% if current_user.following?(content.user) %>
-      <%= button_to "unfollow", unfollow_user_path(content.user), method: :delete, class: 'btn btn-outline-primary btn-sm', form: {class: 'd-inline'} %>
-    <% else %>
-      <%= link_to "follow", follow_user_path(content.user), class: 'btn btn-outline-primary btn-sm' %>
-    <% end %> 
+<% if current_user && user != current_user %>
+  <% if current_user.following?(user) %>
+    <%= button_to "Unfollow", unfollow_user_path(user), method: :delete, data: { turbo_frame: dom_id(user, :follow_button) }, class: 'btn btn-outline-primary btn-sm', form: { class: 'd-inline' } %>
+  <% else %>
+    <%= button_to "Follow", follow_user_path(user), method: :post, data: { turbo_frame: dom_id(user, :follow_button) }, class: 'btn btn-outline-primary btn-sm', form: { class: 'd-inline' } %>
   <% end %>
+<% end %>

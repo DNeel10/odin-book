@@ -8,4 +8,5 @@ class Post < ApplicationRecord
   def liked_by?(user)
     likes.exists?(user: user)
   end 
+
 end

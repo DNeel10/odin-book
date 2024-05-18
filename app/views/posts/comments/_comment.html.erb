@@ -1,6 +1,0 @@
-<div class="container-fluid mt-4 mb-2">
-  <%= comment.body %>  <%= render partial: "posts/likes/button", locals: {likeable: comment } %><br>
-  <small>Posted by: <%= comment.user.email %></small> 
-  <%= render partial: "follows/follow_buttons", locals: { content: comment } %>
-
-</div>

@@ -12,15 +12,24 @@ class PostsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def update
     @post.update!(post_params)
 
     if @post.save
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.turbo_stream
+
+      end
     else
-      render :edit, status: :unprocessable_entity
+      format.html { render :edit, status: :unprocessable_entity }
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: 'posts/form', locals: { post: @post }), status: :unprocessable_entity }
     end
   end
 

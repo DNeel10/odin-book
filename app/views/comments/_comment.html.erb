@@ -5,8 +5,13 @@
       <small>Posted by: <%= nested_comment.user.email %> | likes: <%= nested_comment.likes.count %></small> <br>
 
       <div class="d-flex gap-2">
-        <%= render partial: "follows/follow_buttons", locals: { content: nested_comment } %>
-        <%= render partial: "likes/button", locals: { likeable: nested_comment } %>
+        <%= turbo_frame_tag dom_id(nested_comment.user, :follow_button) do %>
+          <%= render partial: "follows/follow_buttons", locals: { user: nested_comment.user } %>
+        <% end %>
+        
+        <%= turbo_frame_tag dom_id(nested_comment, :like_button) do %>
+          <%= render partial: "likes/button", locals: { likeable: nested_comment } %>
+        <% end %>
       </div>
 
       <div data-controller="replies">
@@ -20,7 +25,7 @@
       </div>
     </div>
       <!-- Render nested comments -->
-    
+
     <% nested_comment.comments.includes(:comments).order(created_at: :desc).each do |reply| %>
       <div class="container-fluid" style="padding-right: 0; margin-right: auto; ">
         <%= render partial: "comments/comment", locals: { nested_comment: reply } %>

@@ -4,12 +4,20 @@ class FollowsController < ApplicationController
   def create
     @user = User.find(params[:id])
     current_user.follow(@user)
-    redirect_back(fallback_location: "posts#index")
+    
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: "posts#index") }
+      format.turbo_stream
+    end
   end
 
   def destroy
     @user = User.find(params[:id])
     current_user.unfollow(@user)
-    redirect_back(fallback_location: "posts#index")
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.turbo_stream
+    end
   end
 end

@@ -1,3 +1,0 @@
-  <% unless likeable.user == current_user %>
-    <%= button_to("Like", post_likes_path(likeable, Like.new), class: 'btn btn-primary btn-sm') %>
-  <% end %>

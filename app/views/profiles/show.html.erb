@@ -17,7 +17,9 @@
     <% if @user == current_user %>
       <%= link_to "Edit Profile", edit_user_profile_path, class: "btn btn-outline-primary" %>
     <% else %>
-      <%= render partial: "follows/follow_buttons", locals: { content: @profile } %>
+      <%= turbo_frame_tag dom_id(@user, :follow_button) do %>
+        <%= render partial: "follows/follow_buttons", locals: { user: @user } %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -26,12 +28,12 @@
   <div class="row">
     <div class="col">
       <div class="card"> 
-        <div class="card-header">Following: <%= @user.followed_users.count %></div>
+        <div class="card-header">Following: <%= @user.followed_users.size %></div>
       </div>
     </div>
     <div class="col">
       <div class="card">
-        <div class="card-header">Followers: <%= @user.followers.count %></div>
+        <div class="card-header">Followers: <%= @user.followers.size %></div>
       </div>
     </div>
   </div>
@@ -43,7 +45,13 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Email: </h5>
-          <p class="card-text"><%= @user.email %>
+          <p class="card-text">
+            <% if @user == current_user %>
+              <%= @user.email %>
+            <% else %>
+              Hidden
+              <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -72,7 +80,7 @@
 <h2 class="text-center">Recent Posts</h2>
 <div class="row">
   <div class="col">
-    <% @user.posts.order(created_at: :desc).limit(5).each do |post| %>
+    <% @posts.each do |post| %>
       <%= render partial: "posts/post_card", locals: { post: post } %>
     <% end %>
   </div>

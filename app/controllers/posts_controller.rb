@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.includes(:user)
+    @posts = Post.by_followed_user(current_user).includes(:user, :likes)
   end
 
   def new

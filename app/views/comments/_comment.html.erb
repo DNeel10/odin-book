@@ -2,13 +2,18 @@
     <div class="container-fluid border-start border-bottom border-secondary-subtle">
       <%= nested_comment.body %><br>
 
-      <small>Posted by: <%= nested_comment.user.email %> | likes: <%= nested_comment.likes.count %></small> <br>
+      <small>Posted by: <%= nested_comment.user.email %> | 
+        likes: 
+      <%= turbo_frame_tag dom_id(nested_comment, :likes_counter) do %>
+        <%= nested_comment.likes.count %>
+      <% end %>
+      </small><br>
 
       <div class="d-flex gap-2">
         <%= turbo_frame_tag dom_id(nested_comment.user, :follow_button) do %>
           <%= render partial: "follows/follow_buttons", locals: { user: nested_comment.user } %>
         <% end %>
-        
+
         <%= turbo_frame_tag dom_id(nested_comment, :like_button) do %>
           <%= render partial: "likes/button", locals: { likeable: nested_comment } %>
         <% end %>

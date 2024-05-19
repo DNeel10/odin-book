@@ -3,3 +3,9 @@
     <%= render partial: "likes/button", locals: { likeable: @likeable } %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.replace dom_id(@likeable, :likes_counter) do %>
+  <%= turbo_frame_tag dom_id(@likeable, :likes_counter) do %>
+    <%= @likeable.likes.count %>
+  <% end %>
+<% end %>

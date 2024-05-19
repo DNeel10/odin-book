@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find_or_create_by(user_id: params[:user_id])
+    @posts = @user.posts.order(created_at: :desc).limit(5)
   end
 
   def edit
@@ -27,7 +28,7 @@ class ProfilesController < ApplicationController
   private
 
    def set_user
-    @user = User.find(params[:user_id])
+    @user = User.includes(:followed_users, :followers, posts: [:likes, :comments]).find(params[:user_id])
    end
 
    def profile_params

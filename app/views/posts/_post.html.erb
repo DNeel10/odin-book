@@ -1,14 +1,31 @@
 
   <div>
-    <%= post.body %><br>
-    <small>created by: <%= link_to post.user.email, user_profile_path(post.user) %> | likes: <%= post.likes.count %></small><br>
-    <div class="d-flex gap-2 mb-3">
-      <%= turbo_frame_tag dom_id(post, :like_button) do %>
-        <%= render partial: "likes/button", locals: { likeable: post } %>
-      <% end %>
-      <%= turbo_frame_tag dom_id(post.user, :follow_button) do %>
-        <%= render partial: "follows/follow_buttons", locals: { user: post.user } %>
-      <% end %>
+    <div class="card mb-2">
+      <div class="card-header d-flex gap-2">
+        <div>
+          created by: <%= link_to post.user.email, user_profile_path(post.user) %> 
+        </div>
+        <%= turbo_frame_tag dom_id(post.user, :follow_button) do %>
+          <%= render partial: "follows/follow_buttons", locals: { user: post.user } %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <p><%= post.body %></p>
+      </div>
+      <div class="card-footer text-body-secondary d-flex gap-4 ">
+        <div>
+          <small>likes: 
+          <%= turbo_frame_tag dom_id(post, :likes_counter) do %>
+            <%= post.likes.count %>
+          <% end %>
+          </small>
+        </div>
+        <div class="d-flex">
+          <%= turbo_frame_tag dom_id(post, :like_button) do %>
+            <%= render partial: "likes/button", locals: { likeable: post } %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -19,8 +36,15 @@
     </small><br>
   <% end %>
 
-
-  <%= render partial: "comments/comment_form", locals: { commentable: post } %>
+  <div data-controller="replies">
+    <div data-replies-target="button" data-action="click->replies#toggle" class="d-inline" 
+          style="text-decoration: underline; cursor: pointer; color: blue">
+          <p class="pb-1 btn btn-primary">Add Comment</p>
+    </div>
+    <div data-replies-target="form" data-primary-class="d-none" class="d-none mb-2">
+      <%= render partial: "comments/comment_form", locals: { commentable: post } %>
+    </div>
+  </div>
 
   <div id="comments_<%=dom_id(@post) %>">
     <%= render partial: "comments/comment", collection: @comments.order(created_at: :desc), as: :nested_comment %>

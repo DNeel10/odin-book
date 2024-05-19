@@ -16,7 +16,8 @@
   <div class="mb-3">
     <%= f.fields_for :user do |u| %>
       <%= u.label :avatar, "Profile Image: ", class: "form-label"  %>
-      <%= u.file_field :avatar %>
+      <%= image_tag @user.avatar, class: "d-block mb-2", size: "200x200" %>
+      <%= u.file_field :avatar, class: "form-control" %>
     <% end %>
   </div>
 

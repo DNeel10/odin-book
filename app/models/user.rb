@@ -45,6 +45,10 @@ class User < ApplicationRecord
     followed_users.include?(user)
   end
 
+  def to_s
+    email.split("@").first
+  end
+
   # OAuth
   def self.from_omniauth(access_token)
     data = access_token.info

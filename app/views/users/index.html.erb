@@ -17,7 +17,7 @@
 
       <div class="col">
         <div class="card-header bg-white d-flex justify-content-between">
-          <div><b><%= user.email.split('@').first %></b></div>
+          <div><b><%= link_to user, user_profile_path(user), style: "text-decoration: none" %></b></div>
           <div>
             <%= turbo_frame_tag dom_id(user, :follow_button) do %>
               <%= render partial: "follows/follow_buttons", locals: { user: user } %>
@@ -30,6 +30,9 @@
           <% else %>
             This user has not posted a description yet
           <% end %>
+        </div>
+        <div class="card-footer bg-white">
+          posts: <%= user.posts.count %> | comments: <%= user.comments.count %>
         </div>
       </div>
     </div>

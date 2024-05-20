@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
   # User Image
   has_one_attached :avatar,
-    :storage => :cloudinary
+    :storage => :cloudinary,
+    :path => ':id/:style/:filename'
 
   # Things a User can create
   has_many :posts, dependent: :destroy

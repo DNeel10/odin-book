@@ -2,8 +2,8 @@
 
 <% @users.each do |user| %>
   <div class="card mb-2 shadow-sm">
-    <div class="container mb-2 row d-flex">
-      <div class="col-1 d-flex justify-content-left align-items-center">
+    <div class="container mb-2 row">
+      <div class="col-12 col-md-1 d-flex justify-content-left align-items-center mb-2 mb-md-0">
         <% if user.avatar.attached? %>
           <div>
             <%= image_tag user.avatar, class: "rounded-circle rounded mx-auto d-block", size: "75x75" %>
@@ -15,7 +15,7 @@
         <% end %>
       </div>
 
-      <div class="col">
+      <div class="col-12 col-md">
         <div class="card-header bg-white d-flex justify-content-between">
           <div><b><%= link_to user, user_profile_path(user), style: "text-decoration: none" %></b></div>
           <div>

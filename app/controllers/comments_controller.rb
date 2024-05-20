@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       redirect_back(fallback_location: root_path)
-      CommentMailer.new_comment(@comment).deliver_now
+
     else
       render :new, status: :unprocessable_entity
     end

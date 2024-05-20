@@ -7,9 +7,10 @@
 </div>
 
 
-
-  <% @posts.order(id: :desc).limit(10).each do |post| %>
+<div id="posts">
+  <% @posts.each do |post| %>
     <%= turbo_frame_tag post do %>
       <%= render partial: "posts/post_card", locals: { post: post } %>
     <% end %>
   <% end %>
+</div>

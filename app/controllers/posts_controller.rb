@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.by_followed_user(current_user).includes(:user, :likes)
+    @posts = Post.includes(:user, :likes).by_followed_user(current_user).order(id: :desc).limit(10)
   end
 
   def new
@@ -38,6 +38,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.html { redirect_to posts_path }
         format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }

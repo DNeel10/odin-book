@@ -25,14 +25,14 @@
           </div>
         </div>
         <div class="card-body">
-          <% unless user.profile.about.blank? %>
+          <% unless user.profile&.about.blank? %>
             <%= user.profile.about %>
           <% else %>
             This user has not posted a description yet
           <% end %>
         </div>
         <div class="card-footer bg-white">
-          posts: <%= user.posts.count %> | comments: <%= user.comments.count %>
+          posts: <%= user.posts_count %> | comments: <%= user.comments_count %>
         </div>
       </div>
     </div>

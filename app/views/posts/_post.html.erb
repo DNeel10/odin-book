@@ -14,7 +14,7 @@
       </div>
       <div class="card-footer text-body-secondary d-flex gap-4 ">
         <div>
-          <small>likes: 
+          <small>Likes: 
           <%= turbo_frame_tag dom_id(post, :likes_counter) do %>
             <%= post.likes.count %>
           <% end %>

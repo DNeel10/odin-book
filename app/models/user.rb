@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   # Things a User can create
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   has_many :likes

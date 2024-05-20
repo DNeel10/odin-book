@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.includes(:user, :likes).by_followed_user(current_user).order(id: :desc).limit(10)
+    @posts = Post.includes(:user, :likes).order(id: :desc).limit(20)
   end
 
   def new

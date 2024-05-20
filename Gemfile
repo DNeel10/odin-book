@@ -84,4 +84,3 @@ gem "figaro", "~> 1.2"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
 
-gem 'paperclip-cloudinary', require: true

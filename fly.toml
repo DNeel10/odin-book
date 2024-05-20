@@ -28,5 +28,5 @@ console_command = '/rails/bin/rails console'
   url_prefix = '/'
 
 [mounts]
-  source="odin_book_data"
-  destinateion="/data"
+  source = "odin_book_data"
+  destination = "/data"

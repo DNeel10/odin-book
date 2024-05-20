@@ -65,6 +65,9 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# Create the /data/storage directory
+RUN mkdir -p /data/storage
+
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails

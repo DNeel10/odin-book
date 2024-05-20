@@ -2,7 +2,7 @@
     <div class="container-fluid border-start border-bottom border-secondary-subtle">
       <%= nested_comment.body %><br>
 
-      <small>Posted by: <%= link_to nested_comment.user.email, user_profile_path(nested_comment.user) %> | 
+      <small>Posted by: <%= link_to nested_comment.user, user_profile_path(nested_comment.user) %> | 
         likes: 
       <%= turbo_frame_tag dom_id(nested_comment, :likes_counter) do %>
         <%= nested_comment.likes_count %>

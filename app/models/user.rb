@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google]
 
   # User Image
-  has_one_attached :avatar,
+  has_attached_file :avatar,
     :storage => :cloudinary,
     cloudinary_credentials: {
       cloud_name: ENV['CLOUDINARY_CLOUD_NAME'],

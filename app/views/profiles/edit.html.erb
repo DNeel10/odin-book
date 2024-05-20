@@ -21,7 +21,7 @@
       <% else %>
         <%= image_tag "profile.png", class: "d-block mb-2", size: "200x200" %>
       <% end %>
-      <%= u.file_field :avatar, class: "form-control" %>
+      <%= u.file_field :avatar, direct_upload: true, class: "form-control" %>
     <% end %>
   </div>
 

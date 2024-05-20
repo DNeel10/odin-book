@@ -9,6 +9,11 @@ class User < ApplicationRecord
   # User Image
   has_one_attached :avatar,
     :storage => :cloudinary,
+    cloudinary_credentials: {
+      cloud_name: ENV['CLOUDINARY_CLOUD_NAME'],
+      api_key: ENV['CLOUDINARY_API_KEY'],
+      api_secret: ENV['CLOUDINARY_API_SECRET']
+    },
     :path => ':id/:style/:filename'
 
   # Things a User can create

@@ -3,13 +3,13 @@
   <div class="card mb-4 shadow"> 
 
     <div class="d-flex justify-content-between align-items-center">
-      <div class="card-body text-secondary">
+      <div class="card-body text-secondary flex-grow-1">
         <%= link_to post.body, 
                     post, 
                     data: { turbo_frame: "_top" }, 
                     style: "text-decoration: none" %>
       </div>
-      <div class="align-items-right px-2">
+      <div class="align-items-right px-2 flex-shrink-0">
         Likes: <%= post.likes_count %>
       </div>
     </div>

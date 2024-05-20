@@ -7,7 +7,8 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google]
 
   # User Image
-  has_one_attached :avatar
+  has_one_attached :avatar,
+    :storage => :cloudinary
 
   # Things a User can create
   has_many :posts, dependent: :destroy

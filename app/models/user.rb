@@ -32,6 +32,10 @@ class User < ApplicationRecord
 
   after_create :create_empty_profile
 
+  # validations
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }
+
   # Follow Logic as an instance method within the User model:
   def follow(user)
     given_follows.create(followed_id: user.id)

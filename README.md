@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Odin-Book
+Odin-book is a social media app that allows users to connect to one another, post thoughts, and comment as they feel appropriate.
+It was built as part of the Ruby on Rails Full Stack Web development curriculum from The Odin Project.
 
-Things you may want to cover:
+## Technologies Used
+Within this project, I used Ruby on Rails, Rspec, Turbo/Stimulus for Rails, OmniAuth2, and Bootstrap.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
